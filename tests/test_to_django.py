@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 
 from deepdiff import DeepDiff
 from pydantic import Field, PostgresDsn, SecretStr, ValidationInfo, computed_field, field_validator
@@ -9,7 +9,7 @@ from pydjantic import BaseDBConfig, to_django
 
 def test_to_django_settings():
     class DatabaseConfig(BaseDBConfig):
-        default: PostgresDsn = Field(
+        default: Union[PostgresDsn, Dict] = Field(
             default="postgres://user:password@hostname:5432/dbname",
             validation_alias="DATABASE_URL",
         )

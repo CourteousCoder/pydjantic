@@ -1,4 +1,4 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 
 from pydantic import Field, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -9,7 +9,7 @@ from pydjantic import BaseDBConfig
 
 def test_empty():
     class DatabaseConfig(BaseDBConfig):
-        default: Optional[PostgresDsn] = None
+        default: Union[Optional[PostgresDsn], Dict] = None
         replica: Optional[Dict] = None
 
     db_settings = DatabaseConfig()
@@ -97,7 +97,7 @@ def test_exact():
 
 def test_dsn_and_exact_config():
     class DatabaseConfig(BaseDBConfig):
-        default: str = Field(default="postgres://user:password@hostname:5432/dbname")
+        default: Union[str, Dict] = Field(default="postgres://user:password@hostname:5432/dbname")
         replica: PostgresDB = PostgresDB()
 
     db_settings = DatabaseConfig()

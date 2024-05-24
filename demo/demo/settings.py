@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from pydantic import Field
 from pydantic.v1.fields import Undefined
@@ -26,7 +26,7 @@ BASE_DIR = CUR_DIR.parent
 
 class DatabaseSettings(BaseDBConfig):
     # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-    default: str = Field(
+    default: Union[str, Dict] = Field(
         default=str(f"sqlite:///{BASE_DIR}/db.sqlite3"),
         validation_alias="DATABASE_URL",
         conn_max_age=0,
