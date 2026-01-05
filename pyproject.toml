@@ -25,10 +25,8 @@ classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
-    # The only Django version that supports both Python 3.9 and 3.10 is Django 4
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    # Python version 3.11 should be backwards compatible enough to work with Django 4
     "Programming Language :: Python :: 3.11",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
