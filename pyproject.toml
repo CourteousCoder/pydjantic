@@ -10,20 +10,25 @@ readme = "README.md"
 keywords = [ "django", "pydantic", "PydanticSettings", "settings" ]
 license = "MIT"
 license-files = [
-  "LICENSE",
+    "LICENSE",
 ]
 
 authors = [ { name = "Vladimir Vyazovetskov", email = "erhosen@gmail.com" } ]
-requires-python = ">=3.9,<3.10"
+requires-python = ">=3.9,<3.12"
 
 classifiers = [
-  "Development Status :: 3 - Alpha",
-  "Environment :: Other Environment",
-  "Intended Audience :: Developers",
-  "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3 :: Only",
-  "Topic :: Software Development :: Libraries :: Python Modules",
-  "Typing :: Typed",
+    "Development Status :: 3 - Alpha",
+    "Environment :: Other Environment",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    # The only Django version that supports both Python 3.9 and 3.10 is Django 4
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    # Python version 3.11 should be backwards compatible enough to work with Django 4
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 dependencies = [
     "dj-database-url (>=2.1,<2.2)",
