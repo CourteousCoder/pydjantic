@@ -13,7 +13,10 @@ license-files = [
     "LICENSE",
 ]
 
-authors = [ { name = "Vladimir Vyazovetskov", email = "erhosen@gmail.com" } ]
+authors = [
+    { name = "Vladimir Vyazovetskov", email = "erhosen@gmail.com" },
+    { name = "Chloe Shetreet", email = "CourteousCoder@gmail.com" },
+]
 requires-python = ">=3.9,<3.12"
 
 classifiers = [
