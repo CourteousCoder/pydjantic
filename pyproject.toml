@@ -2,15 +2,15 @@
 build-backend = "poetry.core.masonry.api"
 requires = [ "poetry-core>=1" ]
 
-[tool.poetry]
+[project]
 name = "pydjantic"
 version = "1.1.5"
 description = "Pydantic Settings for Django"
-authors = [ "Vladimir Vyazovetskov <erhosen@gmail.com>" ]
+authors = [ { name = "Vladimir Vyazovetskov", email = "erhosen@gmail.com" } ]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/ErhoSen/pydjantic"
-repository = "https://github.com/ErhoSen/pydjantic"
+urls.homepage = "https://github.com/ErhoSen/pydjantic"
+urls.repository = "https://github.com/ErhoSen/pydjantic"
 keywords = [ "pydantic", "django", "PydanticSettings", "settings" ]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -20,7 +20,7 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Typing :: Typed",
 ]
-include = [
+license-files = [
   "LICENSE",
 ]
 
