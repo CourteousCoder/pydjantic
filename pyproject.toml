@@ -26,18 +26,18 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
-  "dj-database-url>=2.1,<2.2",
-  "pydantic>=2.5.2,<2.6",
-  "pydantic-settings>=2.1,<2.2",
+    "dj-database-url (>=2.1,<2.2)",
+    "pydantic (>=2.5.2,<2.6)",
+    "pydantic-settings (>=2.1,<2.2)"
 ]
 urls.homepage = "https://github.com/ErhoSen/pydjantic"
 urls.repository = "https://github.com/ErhoSen/pydjantic"
 
 [dependency-groups]
 dev = [
-  "deepdiff>=5.8.1,<5.9",
-  "pre-commit>=2.11.1,<2.22",
-  "pytest>=6.2.2,<6.3",
-  "pytest-cov>=2.11.1,<2.13",
-  "tempenv>=2,<2.1",
+    "deepdiff (>=5.8.1,<5.9)",
+    "pre-commit (>=2.11.1,<2.22)",
+    "pytest (>=6.2.2,<6.3)",
+    "pytest-cov (>=2.11.1,<2.13)",
+    "tempenv (>=2,<2.1)"
 ]
