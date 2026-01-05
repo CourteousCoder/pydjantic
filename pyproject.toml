@@ -1,25 +1,28 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [ "poetry-core>=1" ]
+
 [tool.poetry]
 name = "pydjantic"
 version = "1.1.5"
 description = "Pydantic Settings for Django"
-authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
+authors = [ "Vladimir Vyazovetskov <erhosen@gmail.com>" ]
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/ErhoSen/pydjantic"
 repository = "https://github.com/ErhoSen/pydjantic"
-keywords = ["pydantic", "django", "PydanticSettings", "settings"]
+keywords = [ "pydantic", "django", "PydanticSettings", "settings" ]
 classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Environment :: Other Environment",
-    "Intended Audience :: Developers",
-    "Operating System :: OS Independent",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Typing :: Typed",
+  "Development Status :: 3 - Alpha",
+  "Environment :: Other Environment",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
 ]
 include = [
-    "LICENSE",
+  "LICENSE",
 ]
-
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -33,7 +36,3 @@ pytest-cov = "^2.11.1"
 pre-commit = "^2.11.1"
 tempenv = "^2.0.0"
 deepdiff = "^5.8.1"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
