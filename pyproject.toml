@@ -25,14 +25,14 @@ license-files = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-dj-database-url = ">=2.1.0"
-pydantic = ">=2.5.2"
-pydantic-settings = ">=2.1.0"
+python = ">=3.9,<3.10"
+dj-database-url = ">=2.1.0,<2.2"
+pydantic = ">=2.5.2,<2.6"
+pydantic-settings = ">=2.1.0,<2.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.2"
-pytest-cov = "^2.11.1"
-pre-commit = "^2.11.1"
-tempenv = "^2.0.0"
-deepdiff = "^5.8.1"
+pytest = ">=6.2.2,<6.3"
+pytest-cov = ">=2.11.1,<2.13"
+pre-commit = ">=2.11.1,<2.22"
+tempenv = ">=2.0.0,<2.1"
+deepdiff = ">=5.8.1,<5.9"
