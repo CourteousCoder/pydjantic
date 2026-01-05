@@ -1,39 +1,60 @@
-[tool.poetry]
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [ "poetry-core>=2" ]
+
+[project]
 name = "pydjantic"
-version = "1.1.5"
+version = "2.0.0"
 description = "Pydantic Settings for Django"
-authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
-license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/ErhoSen/pydjantic"
-repository = "https://github.com/ErhoSen/pydjantic"
-keywords = ["pydantic", "django", "PydanticSettings", "settings"]
+keywords = [ "django", "pydantic", "PydanticSettings", "settings" ]
+license = "MIT"
+license-files = [
+    "LICENSE",
+]
+maintainers = [
+    { name = "Vladimir Vyazovetskov", email = "erhosen@gmail.com" },
+]
+
+authors = [
+    { name = "Vladimir Vyazovetskov", email = "erhosen@gmail.com" },
+    { name = "Andrey Lepekhin", email = "35651221+andrey-lepekhin@users.noreply.github.com" },
+    { name = "worldworm", email = "13227454+worldworm@users.noreply.github.com" },
+    { name = "Thomas Grainger", email = "tagrain@gmail.com" },
+    { name = "Enrico Stahn", email = "enrico.stahn@gmail.com" },
+    { name = "Aurel", email = "megnigbetoa@gmail.com" },
+    { name = "q0w", email = "43147888+q0w@users.noreply.github.com" },
+    { name = "Nikolay", email = "liber12@mail.ru" },
+    { name = "Chloe Shetreet", email = "CourteousCoder@gmail.com" },
+]
+requires-python = ">=3.9,<3.12"
+
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Other Environment",
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
 ]
-include = [
-    "LICENSE",
+dependencies = [
+    "dj-database-url (>=2.1,<2.2)",
+    "pydantic (>=2.5.2,<2.6)",
+    "pydantic-settings (>=2.1,<2.2)"
 ]
 
+urls.homepage = "https://github.com/ErhoSen/pydjantic"
+urls.repository = "https://github.com/ErhoSen/pydjantic"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-dj-database-url = ">=2.1.0"
-pydantic = ">=2.5.2"
-pydantic-settings = ">=2.1.0"
-
-[tool.poetry.dev-dependencies]
-pytest = "^6.2.2"
-pytest-cov = "^2.11.1"
-pre-commit = "^2.11.1"
-tempenv = "^2.0.0"
-deepdiff = "^5.8.1"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "deepdiff (>=5.8.1,<5.9)",
+    "pre-commit (>=2.11.1,<2.22)",
+    "pytest (>=6.2.2,<6.3)",
+    "pytest-cov (>=2.11.1,<2.13)",
+    "tempenv (>=2,<2.1)"
+]
