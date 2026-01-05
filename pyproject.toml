@@ -32,9 +32,11 @@ dependencies = [
 "pydantic-settings>=2.1.0,<2.2",
 ]
 
-[tool.poetry.group.dev.dependencies]
-pytest = ">=6.2.2,<6.3"
-pytest-cov = ">=2.11.1,<2.13"
-pre-commit = ">=2.11.1,<2.22"
-tempenv = ">=2.0.0,<2.1"
-deepdiff = ">=5.8.1,<5.9"
+[dependency-groups]
+dev = [
+"pytest>=6.2.2,<6.3",
+"pytest-cov>=2.11.1,<2.13",
+"pre-commit>=2.11.1,<2.22",
+"tempenv>=2.0.0,<2.1",
+"deepdiff>=5.8.1,<5.9",
+]
