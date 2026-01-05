@@ -25,10 +25,12 @@ license-files = [
 ]
 
 requires-python = ">=3.9,<3.10"
-[tool.poetry.dependencies]
-dj-database-url = ">=2.1.0,<2.2"
-pydantic = ">=2.5.2,<2.6"
-pydantic-settings = ">=2.1.0,<2.2"
+
+dependencies = [
+"dj-database-url>=2.1.0,<2.2",
+"pydantic>=2.5.2,<2.6",
+"pydantic-settings>=2.1.0,<2.2",
+]
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=6.2.2,<6.3"
