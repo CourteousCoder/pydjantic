@@ -95,7 +95,10 @@ def test_to_django_with_secrets2():
 
         @field_validator("USERPASS")
         def populate_userpass(cls, value: Any, info: ValidationInfo):
-            return {"USER": info.data.get("USERNAME"), "PASS": info.data.get("PASSWORD")}
+            return {
+                "USER": info.data.get("USERNAME"),
+                "PASS": info.data.get("PASSWORD"),
+            }
 
     settings = Settings(USERNAME="user", PASSWORD="pass")
     to_django(settings)
@@ -141,3 +144,21 @@ def test_to_django_computed_fields():
     settings = StorageSettings(FILE_STORAGE="ExampleStorage")
     to_django(settings)
     assert locals()["STORAGES"]["default"]["BACKEND"] == "ExampleStorage"
+
+
+def test_to_django_inject_into_mock_settings_globals():
+    from . import mock_settings
+
+    class GeneralSettings(BaseSettings):
+        DEBUG: bool = Field(default=True)
+        EXAMPLE_NEW_SETTING: int = 42
+
+    assert vars(mock_settings).get("MOCK_SETTING") == "mock value"
+    assert vars(mock_settings).get("DEBUG") is None
+    assert vars(mock_settings).get("EXAMPLE_NEW_SETTING") is None
+
+    to_django(GeneralSettings(), mock_settings.get_globals())
+
+    assert vars(mock_settings).get("MOCK_SETTING") == "mock value"
+    assert vars(mock_settings).get("DEBUG") is True
+    assert vars(mock_settings).get("EXAMPLE_NEW_SETTING") == 42

@@ -1,5 +1,5 @@
 import inspect
-from typing import Any
+from typing import Any, Dict, Optional
 
 import dj_database_url
 from pydantic import SecretBytes, SecretStr, ValidationInfo, field_validator
@@ -40,9 +40,11 @@ class BaseDBConfig(BaseSettings):
         return dj_database_url.parse(str(value), **kwargs)
 
 
-def to_django(settings: BaseSettings):
-    stack = inspect.stack()
-    parent_frame = stack[1][0]
+def to_django(settings: BaseSettings, injection_target: Optional[Dict[str, Any]] = None):
+    if injection_target is None:
+        stack = inspect.stack()
+        parent_frame = stack[1][0]
+        injection_target = parent_frame.f_locals
 
     def _get_actual_value(val: Any):
         if isinstance(val, BaseSettings):
@@ -58,4 +60,4 @@ def to_django(settings: BaseSettings):
             return val
 
     for key, value in settings.model_dump().items():
-        parent_frame.f_locals[key] = _get_actual_value(value)
+        injection_target[key] = _get_actual_value(value)
