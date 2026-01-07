@@ -151,3 +151,43 @@ def test_env_vars_for_exact_config():
                 "CONN_HEALTH_CHECKS": False,
             },
         }
+
+
+def test_sqlite_file():
+    class DatabaseSettings(BaseDBConfig):
+        # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+        default: Union[str, Dict] = Field(
+            default=str("sqlite:///path/to/db.sqlite3"),
+            validation_alias="DATABASE_URL",
+            json_schema_extra={
+                "ssl_require": False,
+                "conn_max_age": 0,
+            },
+        )
+
+    db_settings = DatabaseSettings()
+    assert db_settings.model_dump() == {
+        "default": {
+            "CONN_HEALTH_CHECKS": False,
+            "CONN_MAX_AGE": 0,
+            "ENGINE": "django.db.backends.sqlite3",
+            "HOST": "",
+            "NAME": "path/to/db.sqlite3",
+            "PASSWORD": "",
+            "PORT": "",
+            "USER": "",
+        },
+    }
+
+
+def test_sqlite_in_memory():
+    class DatabaseSettings(BaseDBConfig):
+        default: Union[str, Dict] = "sqlite://:memory:"
+
+    db_settings = DatabaseSettings()
+    assert db_settings.model_dump() == {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": ":memory:",
+        },
+    }
