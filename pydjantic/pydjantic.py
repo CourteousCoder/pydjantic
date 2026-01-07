@@ -3,7 +3,7 @@ from collections.abc import Mapping
 from typing import Any
 
 import dj_database_url
-from pydantic import SecretBytes, SecretStr, ValidationInfo, field_validator
+from pydantic import SecretBytes, SecretStr, ValidationError, ValidationInfo, field_validator
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -12,12 +12,15 @@ class BaseDBConfig(BaseSettings):
     model_config = SettingsConfigDict(extra="ignore")
 
     @field_validator("*")
-    def format_config_from_dsn(cls, value: Any, info: ValidationInfo):
+    def format_config_from_dsn(cls, value: Any, info: ValidationInfo) -> Any:
         if value is None:
             return {}
 
-        if not isinstance(value, (str, MultiHostUrl)):
-            return value
+        try:
+            value = MultiHostUrl(str(value))
+        except ValidationError:
+            if not isinstance(value, str):
+                return value
 
         kwargs = {}
         # dj_database_url.parse does not accept **kwargs, so we can't blindly feed it with everything
