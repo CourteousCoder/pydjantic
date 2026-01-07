@@ -53,10 +53,10 @@ urls.repository = "https://github.com/ErhoSen/pydjantic"
 
 [dependency-groups]
 dev = [
-    "deepdiff (>=5.8.1,<5.9)",
+    "deepdiff (==5.*)",
     "pre-commit (==2.*)",
-    "pytest (>=6.2.2,<6.3)",
-    "pytest-cov (>=2.11.1,<2.13)",
+    "pytest (==6.*)",
+    "pytest-cov (==2.*)",
     "tempenv (==2.*)"
 ]
 
