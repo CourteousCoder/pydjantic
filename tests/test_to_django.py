@@ -42,6 +42,7 @@ def test_to_django_settings():
         "default": {
             "CONN_MAX_AGE": 0,
             "CONN_HEALTH_CHECKS": False,
+            "DISABLE_SERVER_SIDE_CURSORS": False,
             "ENGINE": "django.db.backends.postgresql",
             "HOST": "hostname",
             "NAME": "dbname",

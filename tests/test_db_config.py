@@ -24,6 +24,7 @@ def test_dsn():
     assert db_settings.default == {
         "CONN_MAX_AGE": 0,
         "CONN_HEALTH_CHECKS": False,
+        "DISABLE_SERVER_SIDE_CURSORS": False,
         "ENGINE": "django.db.backends.postgresql",
         "HOST": "hostname",
         "NAME": "dbname",
@@ -50,6 +51,7 @@ def test_dsn_extra_params():
     assert db_settings.default == {
         "CONN_MAX_AGE": 60,
         "CONN_HEALTH_CHECKS": True,
+        "DISABLE_SERVER_SIDE_CURSORS": False,
         "ENGINE": "my.custom.backend",
         "HOST": "hostname",
         "NAME": "dbname",
@@ -105,6 +107,7 @@ def test_dsn_and_exact_config():
         "default": {
             "CONN_MAX_AGE": 0,
             "CONN_HEALTH_CHECKS": False,
+            "DISABLE_SERVER_SIDE_CURSORS": False,
             "ENGINE": "django.db.backends.postgresql",
             "HOST": "hostname",
             "NAME": "dbname",
@@ -170,6 +173,7 @@ def test_sqlite_file():
         "default": {
             "CONN_HEALTH_CHECKS": False,
             "CONN_MAX_AGE": 0,
+            "DISABLE_SERVER_SIDE_CURSORS": False,
             "ENGINE": "django.db.backends.sqlite3",
             "HOST": "",
             "NAME": "path/to/db.sqlite3",
