@@ -1,4 +1,5 @@
 import inspect
+from collections.abc import Mapping
 from typing import Any
 
 import dj_database_url
@@ -32,7 +33,7 @@ class BaseDBConfig(BaseSettings):
 
         if info.field_name:
             extra = cls.model_fields[info.field_name].json_schema_extra
-            if isinstance(extra, dict):
+            if isinstance(extra, Mapping):
                 for kwarg in known_dj_database_url_kwargs:
                     field_extra = extra.get(kwarg)
                     if field_extra is not None:
@@ -48,7 +49,7 @@ def to_django(settings: BaseSettings):
         if isinstance(val, BaseSettings):
             # for DATABASES and other complicated objects
             return _get_actual_value(val.model_dump())
-        elif isinstance(val, dict):
+        elif isinstance(val, Mapping):
             return {k: _get_actual_value(v) for k, v in val.items()}
         elif isinstance(val, list):
             return [_get_actual_value(item) for item in val]
