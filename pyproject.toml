@@ -27,7 +27,7 @@ authors = [
     { name = "Nikolay", email = "liber12@mail.ru" },
     { name = "Chloe Shetreet", email = "CourteousCoder@gmail.com" },
 ]
-requires-python = ">=3.9,<3.12"
+requires-python = ">=3.9,<3.13"
 
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -38,13 +38,15 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
 ]
+
 dependencies = [
-    "dj-database-url (>=2.1,<2.2)",
-    "pydantic (>=2.5.2,<2.6)",
-    "pydantic-settings (>=2.1,<2.2)"
+    "dj-database-url (>=2.3.0,<3.0)",
+    "pydantic (>=2.5.2,<3.0)",
+    "pydantic-settings (>=2.1,<3.0)"
 ]
 
 urls.homepage = "https://github.com/ErhoSen/pydjantic"
@@ -52,9 +54,15 @@ urls.repository = "https://github.com/ErhoSen/pydjantic"
 
 [dependency-groups]
 dev = [
-    "deepdiff (>=5.8.1,<5.9)",
-    "pre-commit (>=2.11.1,<2.22)",
-    "pytest (>=6.2.2,<6.3)",
-    "pytest-cov (>=2.11.1,<2.13)",
-    "tempenv (>=2,<2.1)"
+    "deepdiff (>=5.8.1,<6.0)",
+    "pre-commit (>=2.11.1,<3.0)",
+    "pytest (>=6.2.2,<7.0)",
+    "pytest-cov (>=2.11.1,<3)",
+    "tempenv (>=2.1.0,<3.0)"
 ]
+
+[tool.ruff]
+line-length = 110
+lint.ignore = ["E203"]
+# skip-string-normalization
+format.quote-style = "preserve"

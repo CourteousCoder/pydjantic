@@ -1,9 +1,18 @@
 import inspect
+from collections.abc import Mapping
 from typing import Any
 
 import dj_database_url
-from pydantic import SecretBytes, SecretStr, ValidationInfo, field_validator
+from pydantic import (
+    BaseModel,
+    SecretBytes,
+    SecretStr,
+    ValidationError,
+    ValidationInfo,
+    field_validator,
+)
 from pydantic_core import MultiHostUrl
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -11,12 +20,15 @@ class BaseDBConfig(BaseSettings):
     model_config = SettingsConfigDict(extra="ignore")
 
     @field_validator("*")
-    def format_config_from_dsn(cls, value: Any, info: ValidationInfo):
+    def format_config_from_dsn(cls, value: Any, info: ValidationInfo) -> Any:
         if value is None:
             return {}
 
-        if not isinstance(value, (str, MultiHostUrl)):
-            return value
+        try:
+            value = MultiHostUrl(str(value))
+        except ValidationError:
+            if not isinstance(value, str):
+                return value
 
         kwargs = {}
         # dj_database_url.parse does not accept **kwargs, so we can't blindly feed it with everything
@@ -32,12 +44,13 @@ class BaseDBConfig(BaseSettings):
 
         if info.field_name:
             extra = cls.model_fields[info.field_name].json_schema_extra
-            if isinstance(extra, dict):
+            if isinstance(extra, Mapping):
                 for kwarg in known_dj_database_url_kwargs:
                     field_extra = extra.get(kwarg)
                     if field_extra is not None:
                         kwargs[kwarg] = field_extra
-        return dj_database_url.parse(str(value), **kwargs)
+        db: dj_database_url.DBConfig = dj_database_url.parse(str(value), **kwargs)
+        return db
 
 
 def to_django(settings: BaseSettings):
@@ -45,15 +58,15 @@ def to_django(settings: BaseSettings):
     parent_frame = stack[1][0]
 
     def _get_actual_value(val: Any):
-        if isinstance(val, BaseSettings):
+        if isinstance(val, BaseModel):
             # for DATABASES and other complicated objects
             return _get_actual_value(val.model_dump())
-        elif isinstance(val, dict):
+        elif isinstance(val, Mapping):
             return {k: _get_actual_value(v) for k, v in val.items()}
         elif isinstance(val, list):
             return [_get_actual_value(item) for item in val]
-        elif isinstance(val, SecretStr) or isinstance(val, SecretBytes):
-            return val.get_secret_value()
+        elif isinstance(val, (SecretBytes, SecretStr)):
+            return _get_actual_value(val.get_secret_value())
         else:
             return val
 
