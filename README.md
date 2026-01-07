@@ -8,6 +8,9 @@
 
 Use Pydantic Settings in your Django application.
 
+Supports Django >= 3.2.25, < 6
+on Python >= 3.9, < 3.12
+
 ![Pydjantc django settings](https://github.com/erhosen-libs/pydjantic/raw/master/images/pydjantic.png "Pydjantc django settings")
 
 ## Introduction
